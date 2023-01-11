@@ -1,0 +1,63 @@
+
+<div class="container">
+    <div class="header">
+        <div class="form-comtrol">
+
+                   
+        <h2>Visitors List</h2>
+
+            <!--Search Functionality-->
+            <input 
+                class="form-comtrol" type="text" placeholder="Search text here..."
+                [(ngModel)]="term"  />
+
+                <a routerLink="/visitadd" class="btn btn-outline-secondary"
+                style="float: right; margin-top: 10px;" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                  </svg> Add Visit</a><br><br>
+        </div>
+    </div>
+    <table class="table table-sm table-responsive-xl">
+        <thead class="thead">
+            <tr >
+                <th>Visit Id</th>
+                <th>Customer Name</th>
+                <th>Contact person</th>
+                <th>Contact Number</th>
+                <th>Intrest Product</th>
+                <th>Visit Subject</th>
+                <th>Desctiption</th>
+                <th>Visit Date</th>
+                <th>Is Disabled</th>
+                <th>Is Deleted</th>
+                <th>Employee Id</th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            <tr *ngFor="let visit of visitorService.visits| filter: term  | paginate: { itemsPerPage: 5, currentPage: page }">
+                <td>{{visit.visitId}}</td>
+                <td>{{visit.custName}}</td>
+                <td>{{visit.contactPerson}}</td>
+                <td>{{visit.contactNo}}</td>
+                <td>{{visit.interestProduct}}</td>
+                <td>{{visit.visitSubject}}</td>
+                <td>{{visit.description}}</td>
+                <td>{{visit.visitDate | date:"dd/MM/yyyy"}}</td>
+                <td>{{visit.isDisabled}}</td>
+                <td>{{visit.isDeleted}}</td>
+                <td>{{visit.empId}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <!--Footer-->
+    <div class="footer">
+        <!--pagination-->
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+    </div>
+
+    
+
+</div>
